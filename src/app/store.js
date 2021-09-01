@@ -1,8 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import { routerMiddleware, connectRouter } from 'connected-react-router'
+import { createBrowserHistory } from 'history';
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+import { search } from '../components/Search/searchReducers';
+
+export const history = createBrowserHistory();
+
+const reducers = combineReducers({
+    search,
+    router: connectRouter(history)
 });
+
+const store = createStore(
+  reducers,
+  {},
+  applyMiddleware(thunk, routerMiddleware(history))
+);
+
+export default store;
