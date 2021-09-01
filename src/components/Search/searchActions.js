@@ -1,8 +1,8 @@
 import { searchByNameAPI } from '../../app/apis';
 
-export const search = (name, type) =>
+export const search = (name, resultsOffset) =>
     (dispatch) => {
-        searchByNameAPI(name, type).then(res => {
+        searchByNameAPI(name, resultsOffset).then(res => {
         dispatch(updateSearchList(res));
     });
 };

@@ -9,18 +9,25 @@ import './searchStyles.scss';
 function Search() {
     
     const [searchValue, setSearchValue] = useState('');
-    const [filterValue, setFilterValue] = useState('track');
+    const [filterValue, setFilterValue] = useState('none');
+    const [preFilterSearchResults, setPreFilterSearchResults] = useState({});
     const [sortValue, setSortValue] = useState('');
+    const [resultsOffset, setResultsOffset] = useState(0);
 
     const searchResults = useSelector(state => state.search.searchResults);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(updateSearchList(initalhUniversityList()));
-    }, []);
+        if(filterValue == 'none')
+            setPreFilterSearchResults(searchResults);
+    }, [searchResults]);
+
+    useEffect(() => {
+        if(searchValue)
+            perfomSearch(searchValue);
+    }, [resultsOffset]);
     
     const fillTable = (university, index) => {
-        console.log(university);
         return (
             <tr key={index}>
                 <td><img src={university.album.images[2].url}/></td>
@@ -34,12 +41,25 @@ function Search() {
         )
     }
 
-    const perfomSearch = (name) => {
-        dispatch(search(name, filterValue));
+    const perfomSearch = (input) => {
+        dispatch(search(input, resultsOffset));
     }
 
     const searchFilterChanged = (value) => {
         setFilterValue(value);
+        var arr = preFilterSearchResults;
+
+        if (value == 'track') {
+            arr = arr.filter( result => {
+                return result.name.toLowerCase().includes(searchValue.toLowerCase());
+            });
+        } else if (value == 'artist'){
+            arr = arr.filter( result => {
+                return result.artists[0].name.toLowerCase().includes(searchValue.toLowerCase());
+            });
+        }
+
+        dispatch(updateSearchList(arr));
     }
 
     const searchSortChanged = (value) => {
@@ -77,6 +97,7 @@ function Search() {
                 <FormControl type="text" placeholder="Search" value={searchValue} onChange={e => setSearchValue(e.target.value)}/>
                 
                 <DropdownButton id="bootsrtap-buttons" className="dropdown-button" style={{marginLeft: '15px'}} onSelect={ value => searchFilterChanged(value) } title="Filter">
+                    <Dropdown.Item className={filterValue == 'none' ? 'dropdown-selected' : 'dropdown-notselected'} eventKey="none">None</Dropdown.Item>
                     <Dropdown.Item className={filterValue == 'track' ? 'dropdown-selected' : 'dropdown-notselected'} eventKey="track">Song</Dropdown.Item>
                     <Dropdown.Item className={filterValue == 'artist' ? 'dropdown-selected' : 'dropdown-notselected'} eventKey="artist">Artist</Dropdown.Item>
                 </DropdownButton>
@@ -104,6 +125,10 @@ function Search() {
                     {searchResults.map(fillTable)}
                 </tbody>
             </Table>
+            </div>
+            <div className="buttom-buttons">
+                <Button id="bootsrtap-buttons" disabled={resultsOffset <= 0} style={{float: 'left'}} onClick={ _ => setResultsOffset(resultsOffset - 15)}>Previous 15</Button>
+                <Button id="bootsrtap-buttons" style={{float: 'right'}} onClick={ _ => setResultsOffset(resultsOffset + 15)}>Next 15</Button>
             </div>
         </div>
     )
