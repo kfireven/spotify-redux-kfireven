@@ -13,7 +13,9 @@ window.location.hash = '';
 var token = hash.access_token;
 
 if (!token) {
-  window.location = 'https://accounts.spotify.com/authorize?client_id=4c900a6717634513b184f1982b6a7565&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsearch';
+  // window.location = 'https://accounts.spotify.com/authorize?client_id=4c900a6717634513b184f1982b6a7565&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsearch';
+
+  window.location = 'https://accounts.spotify.com/authorize?client_id=4c900a6717634513b184f1982b6a7565&response_type=token&redirect_uri=https%3A%2F%2Fkfireven.github.io%2Fsearch';
 }
 
 export function searchByNameAPI (name, resultsOffset) {
