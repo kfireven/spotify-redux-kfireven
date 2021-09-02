@@ -19,7 +19,6 @@ if (!token) {
 }
 
 export function searchTrackAPI (name, resultsOffset) {
-  console.log();
     return fetch('https://api.spotify.com/v1/search?q=' + name + '&type=track&limit=15&offset=' + resultsOffset, {
       method: 'get',
       headers: {
