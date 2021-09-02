@@ -40,7 +40,10 @@ function Search() {
     }
 
     const perfomSearch = (event) => {
-        event.preventDefault();
+        if(event) {
+            event.preventDefault();
+        }
+        
         dispatch(search(searchValue, resultsOffset));
     }
 
