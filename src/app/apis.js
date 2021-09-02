@@ -30,7 +30,6 @@ export function searchTrackAPI (name, resultsOffset) {
     })
       .then((response) => {
           return response.json().then((data) => {
-              console.log(data);
               return data[Object.keys(data)[0]].items;
           }).catch((err) => {
               console.log(err);
