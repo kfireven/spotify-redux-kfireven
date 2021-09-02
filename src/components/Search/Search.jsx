@@ -23,7 +23,7 @@ function Search() {
 
     useEffect(() => {
         if(searchValue)
-            perfomSearch(searchValue);
+            perfomSearch();
     }, [resultsOffset]);
     
     const fillTable = (track, index) => {
