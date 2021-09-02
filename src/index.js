@@ -16,7 +16,7 @@ ReactDOM.render(
     <App>
     <ConnectedRouter history={history}>
     <Switch>
-      <Route exact path="/search" render={() => (<Search/>)}/>
+      <Route exact path="/" render={() => (<Search/>)}/>
     </Switch>
     </ConnectedRouter>
     </App>

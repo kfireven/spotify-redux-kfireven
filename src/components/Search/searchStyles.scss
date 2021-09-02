@@ -13,35 +13,59 @@
 
 .search-bar {
     display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     width: 100%;
 }
 
 .search-table {
     margin-top: 3%;
     height: 90%;
-    overflow-y: scroll;
+    overflow: scroll;
     scrollbar-width: thin;
-    scrollbar-color: $defualt-blue #e3efff;
+    scrollbar-color: $defualt-green #e3efff;
+}
+
+.album-img{
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+@media (min-width: 801px) {
+    
+.search-input {
+    width: 70%;
+    border-color: lime;
+    color: green;
+}
+
+}
+
+@media (max-width: 800px) {
+    
+.search-input {
+    width: 100%;
+    border-color: lime;
+    color: green
+}
+
 }
 
 .buttom-buttons {
     margin-top: 3%;
 }
 
-.dropdown-button {
-    margin-right: 15px;
-}
-
 #bootsrtap-buttons {
     color: white;
-    background-color: $defualt-blue;
+    background-color: $defualt-green;
     border-color: lawngreen;
 }
 
 .dropdown-selected {
-    background-color: $defualt-blue;
+    background-color: $defualt-green;
 }
 
 .dropdown-notselected {
