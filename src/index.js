@@ -16,7 +16,7 @@ ReactDOM.render(
     <App>
     <ConnectedRouter history={history}>
     <Switch>
-      <Route exact path="/" render={() => (<Search/>)}/>
+      <Route exact path="/spotify-redux-kfireven" render={() => (<Search/>)}/>
     </Switch>
     </ConnectedRouter>
     </App>
